@@ -1,1 +1,36 @@
-<p>heroes works!</p>
+<h1>Hero List</h1>
+<div class="container mt-3">
+  <table class="table table-striped bg-light">
+    <thead>
+      <tr>
+        <th (click)="onColumnSelect('id')" class="bg-primary text-center">#</th>
+        <th (click)="onColumnSelect('name')" class="bg-info text-center">
+          NAME
+        </th>
+        <th
+          (click)="onColumnSelect('superPower')"
+          class="bg-primary text-center"
+        >
+          SUPER POWER
+        </th>
+        <th (click)="onColumnSelect('address')" class="bg-info text-center">
+          ADDRESS
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let hero of heroList
+            | search: phraseString:'name'
+            | sort: columnKey:direction
+        "
+      >
+        <td class="text-center">{{ hero.id }}</td>
+        <td class="text-center">{{ hero.name }}</td>
+        <td class="text-center">{{ hero.superPower }}</td>
+        <td class="text-center">{{ hero.address }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
