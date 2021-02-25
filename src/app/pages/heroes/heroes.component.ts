@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Hero } from 'src/app/model/hero';
 import { HeroService } from 'src/app/service/hero.service';
 
@@ -14,9 +15,17 @@ export class HeroesComponent implements OnInit {
 
   heroList = this.heroService.getAll();
 
-  constructor(private heroService: HeroService) {}
+  constructor(
+    private heroService: HeroService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      console.log(params.phrase);
+      this.phraseString = params.phrase;
+    });
+  }
 
   onColumnSelect(key: string): void {
     if (this.columnKey === key) {
